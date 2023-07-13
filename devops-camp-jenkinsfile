@@ -52,26 +52,6 @@ pipeline {
                 }
             }
         }
-            steps {
-                echo "Building database image"
-                withCredentials([usernameColonPassword(credentialsId: 'aharlins-harbor-auth', variable: 'HARBOR-AUTH')]) {
-                    script {
-                        docker.withRegistry('https://$HARBOR_REGISTRY', 'aharlins-harbor-auth') {
-                        }
-                    }
-                }
-            }
-            post {
-                always {
-                    script {
-                        try {
-                        } catch (err) {
-                            echo err.getMessage()
-                        }
-                    }
-                }
-            }
-        }
         //TODO("Lab 7 - Automated Security Scans"): add a stage
         stage('Deploy') {
             steps {
